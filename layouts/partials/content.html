@@ -1,0 +1,19 @@
+{{- /*
+Subtract the last modified date from the unix timestamp and print a warning banner
+if it is older than a defined age
+
+The unix timestamp works better than something like sub now.YearDay .Page.Lastmod.YearDay
+*/ -}}
+
+{{ if and (gt (sub (now.Unix) (.Page.Lastmod.Unix)) .Site.Params.outdatedsec) (gt .Page.Lastmod.Unix 0) }}
+<blockquote class="gdoc-hint warning">
+    <p>
+      <strong>WARNING:</strong> This page was last updated on {{ .Page.Lastmod.Format "2006-01-02" }} and is considered out of date. Consider updating
+    </p>
+</blockquote>
+{{ end }}
+
+{{- $content := .Content -}}
+{{- $content = $content | replaceRE `<nav id="TableOfContents">\s*<ul>\s*<li>\s*<ul>` `<nav id="TableOfContents"><ul>` | replaceRE `</ul>\s*</li>\s*</ul>\s*</nav>` `</ul></nav>` | safeHTML -}}
+{{- $content = $content | replaceRE `(<table>(?:.|\n)+?</table>)` `<div class=table-wrap> ${1} </div>` | safeHTML -}}
+{{- $content -}}
