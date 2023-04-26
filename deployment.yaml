@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hawkeye-sre-runbook
+  labels:
+    app: hawkeye-sre-runbook-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hawkeye-sre-runbook-app
+  template:
+    metadata:
+      labels:
+        app: hawkeye-sre-runbook-app
+    spec:
+      containers:
+      - name: hawkeye-sre-runbook-cname
+        image: nishantaqa/test:latest
+        ports:
+        - containerPort: 1313
