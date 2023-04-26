@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h2>{{ humanize .Data.Plural }}</h2>
+  <ul>
+    {{ range $tag, $pages := .Data.Terms }}
+    <li>
+      <a href="/tags/{{ $tag }}">{{ $tag }}</a>
+      <ul>
+        {{ range $pages }}
+          <li>
+            <b><a href="{{ .RelPermalink }}">{{ strings.Replace .File.Dir "/" " › " }} {{ .LinkTitle }}</a></b>
+            <p>{{ .Summary }}</p>
+          </li>
+        {{ end }}
+      </ul>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

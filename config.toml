@@ -1,6 +1,6 @@
 [[menu.main]]
 baseURL = "localhost:1313"
-title = "Hawkeye-Sre-RunBook"
+title = "MAMBG-Sre-RunBook"
 theme = "hugo-geekdoc"
 admins = []
 

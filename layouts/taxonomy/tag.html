@@ -1,0 +1,12 @@
+{{ define "main" }}
+  {{ $data  := .Data }}
+  <h2>Pages with {{ $data.Singular }} {{ $data.Term }}</h2>
+  <ul>
+    {{ range $data.Pages }}
+    <li>
+      <b><a href="{{ .RelPermalink }}">{{ strings.Replace .File.Dir "/" " › " }} {{ .LinkTitle }}</a></b>
+      <p>{{ .Summary }}</p>
+    </li>
+    {{ end }}
+  </ul>
+{{ end }}
